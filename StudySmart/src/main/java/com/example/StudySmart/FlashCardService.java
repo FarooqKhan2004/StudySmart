@@ -1,5 +1,6 @@
 package com.example.StudySmart;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +26,19 @@ public class FlashCardService {
         }
         flashCardRepository.save(flashCard);
         return flashCard;
+    }
+
+    @Transactional
+    public FlashCard updateFlashCard(long id, String question, String answer) {
+        FlashCard flashCardToUpdate = flashCardRepository.findById(id).orElseThrow(() -> new IllegalStateException("Flash card not found"));
+
+        if (question != null && !question.equals(flashCardToUpdate.getQuestion())) {
+            flashCardToUpdate.setQuestion(question);
+        }
+        if (answer != null && !answer.equals(flashCardToUpdate.getAnswer())) {
+            flashCardToUpdate.setAnswer(answer);
+        }
+
+        return flashCardToUpdate;
     }
 }

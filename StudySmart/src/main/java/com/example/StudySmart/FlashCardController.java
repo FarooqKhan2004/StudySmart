@@ -25,8 +25,20 @@ public class FlashCardController {
     }
 
     @PostMapping
-    public ResponseEntity<FlashCard> addFlashCard(@RequestBody Map<String, String> body) {
-        FlashCard flashCardToAdd = new FlashCard(body.get("question"), body.get("answer"));
-        return new ResponseEntity<FlashCard>(flashCardService.addFlashCard(flashCardToAdd), HttpStatus.CREATED);
+    public ResponseEntity<FlashCard> addFlashCard(@RequestBody FlashCard card) {
+        return new ResponseEntity<FlashCard>(flashCardService.addFlashCard(card), HttpStatus.CREATED);
+    }
+
+    @PutMapping
+    @RequestMapping("{id}")
+    public ResponseEntity<FlashCard> updateFlashCard(
+            @PathVariable Long id,
+            @RequestBody Map<String, String> body
+    ) {
+        return new ResponseEntity<FlashCard>(flashCardService
+                .updateFlashCard(id, body.getOrDefault("question",
+                        null), body.getOrDefault("answer",
+                        null)),
+                HttpStatus.OK);
     }
 }
