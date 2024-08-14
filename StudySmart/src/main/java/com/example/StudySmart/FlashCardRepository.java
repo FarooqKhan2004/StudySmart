@@ -2,6 +2,10 @@ package com.example.StudySmart;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FlashCardRepository extends JpaRepository<FlashCard, Long> {
+import java.util.Optional;
 
+public interface FlashCardRepository extends JpaRepository<FlashCard, Long> {
+    Optional<FlashCard> findFlashCardByQuestion(String question);
+
+    Optional<FlashCard> findFlashCardByAnswer(String answer);
 }

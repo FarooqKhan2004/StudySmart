@@ -17,4 +17,13 @@ public class FlashCardService {
     public List<FlashCard> getAllFlashCards() {
         return flashCardRepository.findAll();
     }
+
+    public FlashCard addFlashCard(FlashCard flashCard) {
+        if(flashCardRepository.findFlashCardByAnswer(flashCard.getAnswer()).isPresent() &&
+        flashCardRepository.findFlashCardByQuestion(flashCard.getQuestion()).isPresent()) {
+            throw new IllegalStateException("Flash card already exists");
+        }
+        flashCardRepository.save(flashCard);
+        return flashCard;
+    }
 }
