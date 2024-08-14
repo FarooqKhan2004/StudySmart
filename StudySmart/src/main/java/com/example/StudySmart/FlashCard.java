@@ -50,4 +50,14 @@ public class FlashCard {
     public String getAnswer() {
         return answer;
     }
+
+    @Override
+    public String toString() {
+        return "FlashCard{" +
+                "question='" + question + '\'' +
+                ", answer='" + answer + '\'' +
+                '}';
+    }
+
+
 }
