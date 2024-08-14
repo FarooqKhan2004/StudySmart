@@ -41,4 +41,10 @@ public class FlashCardService {
 
         return flashCardToUpdate;
     }
+
+    public FlashCard deleteFlashCard(long id) {
+         FlashCard deleteCard = flashCardRepository.findById(id).orElseThrow(() -> new IllegalStateException("Flash card not found"));
+         flashCardRepository.deleteById(id);
+         return deleteCard;
+    }
 }

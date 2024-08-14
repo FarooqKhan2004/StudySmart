@@ -29,8 +29,7 @@ public class FlashCardController {
         return new ResponseEntity<FlashCard>(flashCardService.addFlashCard(card), HttpStatus.CREATED);
     }
 
-    @PutMapping
-    @RequestMapping("{id}")
+    @PutMapping(path = "{id}")
     public ResponseEntity<FlashCard> updateFlashCard(
             @PathVariable Long id,
             @RequestBody Map<String, String> body
@@ -40,5 +39,10 @@ public class FlashCardController {
                         null), body.getOrDefault("answer",
                         null)),
                 HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "{id}")
+    public ResponseEntity<FlashCard> deleteFlashCard(@PathVariable Long id) {
+        return new ResponseEntity<FlashCard>(flashCardService.deleteFlashCard(id), HttpStatus.OK);
     }
 }
