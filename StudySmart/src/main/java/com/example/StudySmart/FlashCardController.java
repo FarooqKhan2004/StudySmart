@@ -10,6 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/v1/FlashCards")
+@CrossOrigin("*")
 public class FlashCardController {
 
     private final FlashCardService flashCardService;
