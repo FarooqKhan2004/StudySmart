@@ -25,6 +25,15 @@ public class FlashCardController {
         return new ResponseEntity<List<FlashCard>>(flashCardService.getAllFlashCards(), HttpStatus.OK);
     }
 
+    @GetMapping(path = "{id}")
+    public ResponseEntity<FlashCard> getFlashCard(@PathVariable long id) {
+        FlashCard flashCard = flashCardService.getFlashCardById(id);
+        if (flashCard == null) {
+            return new ResponseEntity<FlashCard>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<FlashCard>(flashCard, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<FlashCard> addFlashCard(@RequestBody FlashCard card) {
         return new ResponseEntity<FlashCard>(flashCardService.addFlashCard(card), HttpStatus.CREATED);

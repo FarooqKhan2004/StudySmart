@@ -19,6 +19,10 @@ public class FlashCardService {
         return flashCardRepository.findAll();
     }
 
+    public FlashCard getFlashCardById(Long id) {
+        return flashCardRepository.findById(id).orElse(null);
+    }
+
     public FlashCard addFlashCard(FlashCard flashCard) {
         if(flashCardRepository.findFlashCardByAnswer(flashCard.getAnswer()).isPresent() &&
         flashCardRepository.findFlashCardByQuestion(flashCard.getQuestion()).isPresent()) {
